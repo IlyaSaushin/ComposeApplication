@@ -1,4 +1,4 @@
-package com.earl.composeapplication.ui.theme
+package com.earl.composeapplication.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
