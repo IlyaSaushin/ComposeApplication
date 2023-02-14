@@ -7,4 +7,10 @@
     <string name="two">two</string>
     <string name="three">three</string>
     <string name="details">details</string>
+    <string name="login">login</string>
+    <string name="articles">articles</string>
+    <string name="concreteArticle">concreteArticle</string>
+    <string name="nyt">New York Times Api</string>
+    <string name="password">Password</string>
+    <string name="log">Login</string>
 </resources>
