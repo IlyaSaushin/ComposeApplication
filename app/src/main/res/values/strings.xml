@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ComposeApplication</string>
+    <string name="home_catalog">home</string>
+    <string name="home_profile">profile</string>
+    <string name="home_search">search</string>
+    <string name="one">one</string>
+    <string name="two">two</string>
+    <string name="three">three</string>
+    <string name="details">details</string>
 </resources>

@@ -3,111 +3,78 @@ package com.earl.composeapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalOf
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.earl.composeapplication.screens.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//            testCompose()
-            listItem()
+            BottomNavBar()
         }
     }
 }
 
 @Composable
-fun testCompose() {
-    Column(
-        modifier = Modifier
-            .background(Color.Cyan)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround
-    ) {
-        Row(
-            modifier = Modifier
-                .background(Color.Blue)
-                .fillMaxWidth(1f),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            Text(text = "Hello")
-            Text(text = "World")
-            Text(text = "!!!")
+fun BottomNavBar() {
+    val screenList = listOf(
+        Screen.One,
+        Screen.Two,
+        Screen.Three,
+    )
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = {
+            BottomNavigation {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
+                screenList.forEach { screen ->
+                    BottomNavigationItem(
+                        icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
+                        label = { Text(stringResource(screen.resourceId)) },
+                        selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                        onClick = {
+                            navController.navigate(screen.route) {
+                                // Pop up to the start destination of the graph to
+                                // avoid building up a large stack of destinations
+                                // on the back stack as users select items
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                // Avoid multiple copies of the same destination when
+                                // reselecting the same item
+                                launchSingleTop = true
+                                // Restore state when reselecting a previously selected item
+                                restoreState = true
+                            }
+                        }
+                    )
+                }
+            }
         }
-        Row(
-            modifier = Modifier
-                .background(Color.Blue)
-                .fillMaxWidth(1f),
-            horizontalArrangement = Arrangement.SpaceAround,
-        ) {
-            Text(text = "Hello")
-            Text(text = "World")
-            Text(text = "!!!")
-        }
-        Row(
-            modifier = Modifier
-                .background(Color.Blue)
-                .fillMaxWidth(1f),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            Text(text = "Hello")
-            Text(text = "World")
-            Text(text = "!!!")
-        }
-    }
-}
-
-@Preview
-@Composable
-fun listItem() {
-    Card(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxWidth()
-            .padding(10.dp),
-        shape = RoundedCornerShape(15.dp),
-        elevation = 5.dp
-    ) {
-        Box(
-            modifier = Modifier
-                .background(Color.Cyan)
-                .padding(10.dp)
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                    contentDescription = "image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .clip(CircleShape)
-                        .background(Color.Gray),
-                )
-                Column(
-                    modifier = Modifier
-                        .padding(start = 10.dp),
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Text(text = "SOME TEXT", Modifier.padding(bottom = 5.dp))
-                    Text(text = "SOME TEXT", Modifier.padding(top = 5.dp))
+    ) { innerPadding ->
+        NavHost(navController, startDestination = Screen.One.route, Modifier.padding(innerPadding)) {
+            composable(Screen.One.route) { OneScreen() { dest -> navController.navigate(dest) } }
+            composable(Screen.Two.route) { TwoScreen() }
+            composable(Screen.Three.route) { ThreeScreen() }
+            composable(
+                "detailsScreen/{details}"
+            ) { backStackEntry ->
+                backStackEntry.arguments?.getString("details")?.let {
+                    DetailsScreen(details = it)
                 }
             }
         }
