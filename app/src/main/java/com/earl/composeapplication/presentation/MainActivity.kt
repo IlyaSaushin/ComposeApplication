@@ -118,7 +118,7 @@ fun SuminLesson() {
             Button(
                 modifier = Modifier
                     .padding(start = 10.dp),
-                onClick = { /*TODO*/ }
+                onClick = {  }
             ) {
                 Text(
 
