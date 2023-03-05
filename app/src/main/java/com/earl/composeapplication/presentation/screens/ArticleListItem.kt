@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,12 +38,12 @@ fun ArticleListItem(
                 modifier = Modifier
                     .padding(start = 24.dp)
             ) {
-                Text(text = title, modifier = Modifier.padding(8.dp), fontSize = 22.sp)
+                Text(text = article.title, modifier = Modifier.padding(8.dp), fontSize = 22.sp)
                 Row {
-                    Text(text = section, modifier = Modifier.padding(8.dp), fontSize = 14.sp)
-                    Text(text = abstract, modifier = Modifier.padding(8.dp), fontSize = 14.sp)
+                    Text(text = article.section, modifier = Modifier.padding(8.dp), fontSize = 14.sp)
+                    Text(text = article.abstract, modifier = Modifier.padding(8.dp), fontSize = 14.sp)
                 }
-                Text(text = date, modifier = Modifier.padding(8.dp), fontSize = 14.sp)
+                Text(text = article.date, modifier = Modifier.padding(8.dp), fontSize = 14.sp)
             }
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
@@ -50,7 +51,6 @@ fun ArticleListItem(
                 modifier = Modifier
                     .padding(end = 24.dp)
             )
-
         }
     }
 }

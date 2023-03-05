@@ -2,6 +2,7 @@ plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -66,4 +67,14 @@ dependencies {
 
     implementation project(path: ':data')
     implementation project(path: ':domain')
+
+    // lifecycle components
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+
+    // dagger2
+    implementation 'com.google.dagger:dagger:2.44.2'
+    kapt 'com.google.dagger:dagger-compiler:2.44.2'
 }

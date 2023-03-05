@@ -21,20 +21,20 @@ fun ArticlesScreen(
     navigate: (String) -> Unit
 ) {
     val list = listOf(
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
-        ArticlePresentation.Base(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
+        ArticlePresentation(0, "title", "section", "abstract", "link", "date", "picture"),
     )
     Scaffold(
         backgroundColor = backgroundColor
